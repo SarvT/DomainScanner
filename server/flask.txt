@@ -1,0 +1,50 @@
+https://flask.palletsprojects.com/en/stable/quickstart/#a-minimal-application
+
+Option 2: Allow CORS for specific routes If you want to only allow CORS for certain routes, you can specify it for individual routes like this:
+python
+Copy
+from flask import Flask
+from flask_cors import cross_origin
+
+app = Flask(__name__)
+
+@app.route("/api/data", methods=["GET"])
+@cross_origin()  # This enables CORS for this specific route
+def get_data():
+    return {"message": "Hello, World!"}
+
+if __name__ == "__main__":
+    app.run(debug=True)
+3. Configuring CORS with Specific Settings (Optional)
+You can fine-tune the CORS configuration to control which origins, methods, headers, and credentials are allowed.
+
+Allowing specific origins:
+
+python
+Copy
+CORS(app, origins=["http://example.com", "https://yourdomain.com"])
+This restricts CORS to the specified origins only.
+
+Allowing specific methods:
+
+python
+Copy
+CORS(app, methods=["GET", "POST", "PUT", "DELETE"])
+Allowing credentials (cookies or authentication headers):
+
+python
+Copy
+CORS(app, supports_credentials=True)
+Allowing specific headers:
+
+python
+Copy
+CORS(app, allow_headers=["Authorization", "Content-Type"])
+Example with all settings:
+
+python
+Copy
+CORS(app, origins=["http://example.com"],
+      methods=["GET", "POST"],
+      allow_headers=["Content-Type", "Authorization"],
+      supports_credentials=True)
