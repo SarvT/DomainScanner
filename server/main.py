@@ -64,11 +64,12 @@ def scan_domain(domain):
 def home():
     return "jsonify"
 
-@app.route("/eval", methods=['POST'])
+@app.route("/scan", methods=['GET'])
 def eval():
-    data = request.json.get('data')
-    print(data)
-    results = scan_domain(data)
+    domain = request.args.get('domain')
+    # data = request.json.get('data')
+    print(domain)
+    results = scan_domain(domain)
     return jsonify(results)
 
 if __name__=="__main__":
